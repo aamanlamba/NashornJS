@@ -1,4 +1,4 @@
-package NashornJS;
+package org.aamanlamba.NashornJS;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -11,7 +11,11 @@ import java.util.Map;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
-
+/**
+ * @author aamanlamba
+ * Import from csv - can be called in a Runnable Thread
+ * Uses org.apache.commons.csv
+ */
 public class ImportRunnable implements Runnable {
     private String file;
     public List<Record> listOfRecords = new ArrayList<Record>();

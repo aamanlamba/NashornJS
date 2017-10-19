@@ -1,7 +1,11 @@
-package NashornJS;
+package org.aamanlamba.NashornJS;
 
 import org.apache.commons.csv.CSVRecord;
 
+/**
+ * @author aamanlamba
+ * Example of record class - could be used to load a CSV record with different columns
+ */
 public class Record {
 	 int id;
 	String city;

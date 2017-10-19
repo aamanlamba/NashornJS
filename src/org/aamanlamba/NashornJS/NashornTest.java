@@ -1,4 +1,4 @@
-package NashornJS;
+package org.aamanlamba.NashornJS;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileReader;
@@ -28,7 +28,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
-
+/**
+ * @author aamanlamba
+ * Tester class to test various Java 8 functions
+ */
 public class NashornTest {
 	
 private String tickMessage="Tick...";

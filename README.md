@@ -1,4 +1,4 @@
-# NashornJS
+# org.aamanlamba.NashornJS
 Simple Java project to demonstrate various Java 8 features
 
 * Anonymous Inner classes

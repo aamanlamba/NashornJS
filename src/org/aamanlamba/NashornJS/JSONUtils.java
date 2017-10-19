@@ -1,6 +1,7 @@
-package NashornJS;
+package org.aamanlamba.NashornJS;
 
 import java.io.FileNotFoundException;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
@@ -9,6 +10,12 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+/**
+ * @author aamanlamba
+ * JSON utils to read JSON Object and Array from file
+ * Uses org.json.simple
+ */
 public class JSONUtils {
 	
 	JSONArray jArr = new JSONArray();
