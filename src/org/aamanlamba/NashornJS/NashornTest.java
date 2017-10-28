@@ -1,11 +1,14 @@
 package org.aamanlamba.NashornJS;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -55,6 +58,17 @@ private String okMessage = "Press OK to exit program";
 		b.hit();
 		b2.hit();
 
+		//method reference to functional interface
+		Consumer<Integer> printer = System.out::println;
+		Consumer<Number> printer2 = System.out::println;
+		Stream.of(1,43,52,23,123)
+				.forEach(printer);
+		
+		//method reference to a Supplier static method
+		Stream.generate(Math::random)
+			.limit(10)
+			.forEach(printer2);
+		
 		//demonstrate importing csv to JSON
 		ImportRunnable imp = new ImportRunnable("src/cities.csv");
 		JSONUtils jsonUtils = new JSONUtils();
@@ -69,6 +83,9 @@ private String okMessage = "Press OK to exit program";
 		jsonUtils.readJSONObjectFromFile("src/blockchainTest.json", jsonObjs);
 		for(JSONObject jObj: jsonObjs)
 			System.out.println(jObj);
+		
+		
+		
 		//load json array
 		//jsonUtils.readJSONArrayFromFile("src/JsonArray.json", jArr);
 		//System.out.println(jArr);
