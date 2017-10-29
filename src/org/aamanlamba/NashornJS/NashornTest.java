@@ -6,8 +6,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.script.ScriptEngine;
@@ -58,7 +61,7 @@ private String okMessage = "Press OK to exit program";
 		b.hit();
 		b2.hit();
 
-		//method reference to functional interface
+		//method reference to functional interface - use java.util.function.Consumer<Integer>
 		Consumer<Integer> printer = System.out::println;
 		Consumer<Number> printer2 = System.out::println;
 		Stream.of(1,43,52,23,123)
@@ -84,6 +87,7 @@ private String okMessage = "Press OK to exit program";
 		for(JSONObject jObj: jsonObjs)
 			System.out.println(jObj);
 		
+		sortStrings();
 		
 		
 		//load json array
@@ -119,6 +123,38 @@ private String okMessage = "Press OK to exit program";
 		intList.forEach(el1 -> System.out.println(el1));
 		
 		
+	}
+
+	/*
+	 * Examples for java.util.function with Strings
+	 */
+	private static void sortStrings() {
+		System.out.println("Sorted collection");
+		List<String> bonds = Arrays.asList("Moore","Connery","Craig","Lazeby","Allen","Dalton","Brosnan");
+		List<String> sorted = bonds.stream()
+								.sorted(Comparator.naturalOrder())
+								.collect(Collectors.toList());
+		System.out.println(sorted);
+		
+		//Print string elements of a collection
+		bonds.forEach(new Consumer<String>() {
+			@Override
+			public void accept(String s) {
+				System.out.println(s);
+			}
+		});
+		System.out.println("lambda expression");
+		sorted.forEach(s -> System.out.println(s));
+		System.out.println("-------");
+		// Filter stream and store in Optional container object which may or may not contain a value - check with orElse, orElseGet, get, isPresent
+		// Note the use of predicate in filter
+		Optional<String> filteredStrings = bonds.stream()
+											.filter(name -> name.startsWith("X"))
+											.findFirst();
+		//Output matched result or entire list
+		
+		System.out.println(filteredStrings.orElseGet(()->String.format("Result not found", bonds.stream().collect(Collectors.joining(",")))));
+										
 	}
 
 	private void go() {

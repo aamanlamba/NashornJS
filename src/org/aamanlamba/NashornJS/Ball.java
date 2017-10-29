@@ -22,4 +22,12 @@ public interface Ball {
 	default void count() {
 		System.out.println("Default count implementation");
 	}
+	/**
+	 * 
+	 * @param obj
+	 * @return
+	 * indicates whether other object is 'equal to' this ball 
+	 * This does not break the 'functional interface' contract because this is an Object method
+	 */
+	boolean equals(Object obj);
 }
