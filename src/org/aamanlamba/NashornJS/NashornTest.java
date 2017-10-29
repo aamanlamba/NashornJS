@@ -158,6 +158,20 @@ private String okMessage = "Press OK to exit program";
 		System.out.println(bonds.stream()
 							.collect(Collectors.partitioningBy(s->s.length()==5)));
 		System.out.println("-------");
+		System.out.println("Group list by condition (length=5) - create a map between condition and result group");
+		System.out.println(bonds.stream()
+							.collect(Collectors.groupingBy(s->s.length()==5)));
+		System.out.println("-------");
+		System.out.println("Partition list by condition (length=5) and show counts in each partition");
+		System.out.println(bonds.stream()
+							.collect(Collectors.partitioningBy(s->s.length()==5,
+													Collectors.counting())));
+		System.out.println("-------");
+		System.out.println("Partition list by condition (length=5)");
+		System.out.println(bonds.stream()
+							.collect(Collectors.groupingBy(s->s.length()==5,
+															Collectors.counting())));
+		System.out.println("-------");
 		System.out.println("Use map-filter-reduce paradigm on array");
 		System.out.println("Number of Bonds:" + bonds.stream()
 													.map(s->s.length())
