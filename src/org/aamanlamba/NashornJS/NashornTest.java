@@ -126,24 +126,24 @@ private String okMessage = "Press OK to exit program";
 	}
 
 	/*
-	 * Examples for java.util.function with Strings
+	 * Examples for java.util.function with Strings and streams
 	 */
 	private static void sortStrings() {
-		System.out.println("Sorted collection");
 		List<String> bonds = Arrays.asList("Moore","Connery","Craig","Lazeby","Allen","Dalton","Brosnan");
 		List<String> sorted = bonds.stream()
 								.sorted(Comparator.naturalOrder())
 								.collect(Collectors.toList());
+		System.out.println("Sorted collection");
 		System.out.println(sorted);
 		
-		//Print string elements of a collection
+		System.out.println("Print original collection using anonymous implementation of Consumer interface");
 		bonds.forEach(new Consumer<String>() {
 			@Override
 			public void accept(String s) {
 				System.out.println(s);
 			}
 		});
-		System.out.println("lambda expression");
+		System.out.println("sort using lambda expression");
 		sorted.forEach(s -> System.out.println(s));
 		System.out.println("-------");
 		// Filter stream and store in Optional container object which may or may not contain a value - check with orElse, orElseGet, get, isPresent
@@ -154,7 +154,30 @@ private String okMessage = "Press OK to exit program";
 		//Output matched result or entire list
 		
 		System.out.println(filteredStrings.orElseGet(()->String.format("Result not found", bonds.stream().collect(Collectors.joining(",")))));
-										
+		System.out.println("Partition list by condition (length=5)");
+		System.out.println(bonds.stream()
+							.collect(Collectors.partitioningBy(s->s.length()==5)));
+		System.out.println("-------");
+		System.out.println("Use map-filter-reduce paradigm on array");
+		System.out.println("Number of Bonds:" + bonds.stream()
+													.map(s->s.length())
+													.count());	
+		System.out.println("-------");
+		System.out.println("Check Palindrome:" + String.valueOf(isPalindrome("Able was I ere I saw Elba")));								
+	}
+
+	/*
+	 * convert String to stream using chars or codePoints and then apply stream-type pipeline functions
+	 */
+	private static boolean isPalindrome(String s) {
+		String forward = s.toLowerCase().codePoints()
+						  .filter(Character::isLetterOrDigit)
+						  .collect(StringBuilder::new,
+								  StringBuilder::appendCodePoint,
+								  StringBuilder::append)
+						  .toString();
+		String backward = new StringBuilder(forward).reverse().toString();
+		return forward.equals(backward);
 	}
 
 	private void go() {
@@ -165,13 +188,15 @@ private String okMessage = "Press OK to exit program";
 	}
 
 
-	//inner class
+	/*
+	 * Inner class implementing actionListener
+	 */
 	class Ticker implements ActionListener {
 		private boolean tick = true;
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
+			
 			if(tick) {
 				System.out.println(tickMessage);
 			}
