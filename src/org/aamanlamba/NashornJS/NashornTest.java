@@ -4,6 +4,8 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -86,8 +88,11 @@ private String okMessage = "Press OK to exit program";
 		jsonUtils.readJSONObjectFromFile("src/blockchainTest.json", jsonObjs);
 		for(JSONObject jObj: jsonObjs)
 			System.out.println(jObj);
-		
+		//Do String and Stream stuff
 		sortStrings();
+		
+		// use java.nio.file
+		findWordsinFiles();
 		
 		
 		//load json array
@@ -123,6 +128,24 @@ private String okMessage = "Press OK to exit program";
 		intList.forEach(el1 -> System.out.println(el1));
 		
 		
+	}
+
+	/*
+	 * Use java.nio.file functions
+	 * on Webster's dictionary
+	 */
+	private static void findWordsinFiles() {
+		//try-catch-with-resources
+		// Load dictionary file as stream of strings for each line
+		try (Stream<String> lines = Files.lines(Paths.get("/usr/share/dict/web2"))){
+			lines.filter(s -> s.length()>20)
+							.sorted(Comparator.comparingInt(String::length).reversed())
+							.limit(10)
+							.forEach(w ->System.out.println(w));
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/*
